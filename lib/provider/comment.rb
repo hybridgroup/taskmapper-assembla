@@ -6,22 +6,30 @@ module TicketMaster::Provider
     # versions of the ticket.
     #
     class Comment < TicketMaster::Provider::Base::Comment
-      #API = AssemblaAPI::Comment # The class to access the api's comments
+      API = AssemblaAPI::Comment # The class to access the api's comments
       # declare needed overloaded methods here
       def created_at
-        @created_at ||= self[:created_at] ? Time.parse(self[:created_at]) : nil
+        begin
+          Time.parse(self[:created_on])
+        rescue
+          self[:created_on]
+        end
       end
       
       def updated_at
-        @updated_at ||= self[:updated_at] ? Time.parse(self[:updated_at]) : nil
+        begin
+          Time.parse(self[:updated_at])
+        rescue
+          self[:updated_at]
+        end
       end
       
       def project_id
-        self.prefix_options[:project_id]
+        self.prefix_options[:space_id]
       end
       
-      def ticket_id
-        self.prefix_options[:ticket_id]
+      def ticket_number
+        self.prefix_options[:ticket_number]
       end
     end
   end

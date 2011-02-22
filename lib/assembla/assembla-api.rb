@@ -2,14 +2,6 @@ require 'rubygems'
 require 'active_support'
 require 'active_resource'
 
-# Ruby lib for working with the Kanbanpad API's XML interface.  
-# You should set the authentication using your login
-# credentials with HTTP Basic Authentication. 
-#
-#   using email and user api key
-#   KanbanpadAPI.authenticate('rick@techno-weenie.net', '70b4b722d55387286b817642289392a64d20b25e')
-#
-#
 # This library is a small wrapper around the REST interface.  
 
 module AssemblaAPI
@@ -39,20 +31,14 @@ module AssemblaAPI
 
   class Project < Base
    self.site += 'spaces/my_spaces'
-   #def tickets(options = {})
-    #  Ticket.find(:all, :params => options.update(:space_id => id))
-   #end
-   def tickets(options = {})
-      ProjectTicket.find(:all, :params => options.update(:space_id => id))
-    end
   end
 
   class Ticket < Base
-    self.site += 'spaces/:space_id'
-  end   
-
-  class ProjectTicket < Base
-    self.site += 'spaces/:space_id'
-    self.element_name = 'ticket'
+    self.site += 'spaces/:space_id/'
   end
+
+  class Comment < Base
+    self.site += '/spaces/:space_id/tickets/:ticket_number'
+  end
+
 end

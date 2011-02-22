@@ -10,18 +10,49 @@ module TicketMaster::Provider
         self.summary
       end
       
-      def created_on
-        @created_on ||= self[:created_on] ? Time.parse(self[:created_on]) : nil
+      def created_at
+        begin
+          Time.parse(self[:created_on])
+        rescue
+          self[:created_on]
+        end
       end
       
       def updated_at
-        @updated_at ||= self[:updated_at] ? Time.parse(self[:updated_at]) : nil
+        begin
+          Time.parse(self[:updated_at])
+        rescue
+          self[:updated_at]
+        end
       end
       
       def project_id
         self.prefix_options[:space_id]
       end
-      
+
+      def number
+        self[:number]
+      end
+
+      def comments(*options)
+        begin
+          if options.empty?
+            comments = AssemblaAPI::Comment.find(:all, :params => {:space_id => project_id, :ticket_number => number}).collect { |comment| TicketMaster::Provider::Assembla::Comment.new comment }
+          else
+            super(*options)
+          end
+        rescue
+         []
+        end
+      end
+
+     def self.create(*options)
+        ticket = API.new(*options)
+        ticketn = self.new ticket
+        ticket.save
+        ticketn
+      end
+
     end
   end
 end
