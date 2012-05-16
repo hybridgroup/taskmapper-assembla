@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Assembla
-    # Ticket class for ticketmaster-assembla
+    # Ticket class for taskmapper-assembla
     #
     
-    class Ticket < TicketMaster::Provider::Base::Ticket
+    class Ticket < TaskMapper::Provider::Base::Ticket
       API = AssemblaAPI::Ticket # The class to access the api's tickets
       # declare needed overloaded methods here
       def title

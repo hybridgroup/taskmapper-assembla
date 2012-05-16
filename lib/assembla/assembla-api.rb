@@ -2,12 +2,9 @@ require 'rubygems'
 require 'active_support'
 require 'active_resource'
 
-# Ruby lib for working with the Kanbanpad API's XML interface.  
+# Ruby lib for working with the Assembla API's XML interface.  
 # You should set the authentication using your login
 # credentials with HTTP Basic Authentication. 
-#
-#   using email and user api key
-#   KanbanpadAPI.authenticate('rick@techno-weenie.net', '70b4b722d55387286b817642289392a64d20b25e')
 #
 #
 # This library is a small wrapper around the REST interface.  

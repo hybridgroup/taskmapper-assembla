@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Assembla
-    # Project class for ticketmaster-assembla
+    # Project class for taskmapper-assembla
     #
     #
-    class Project < TicketMaster::Provider::Base::Project
+    class Project < TaskMapper::Provider::Base::Project
       API = AssemblaAPI::Project # The class to access the api's projects
       # declare needed overloaded methods here
       def name
